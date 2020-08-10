@@ -32,4 +32,24 @@ async function postData(additionalUrl, data) { //register, login
     return response.json();
 }
 
-module.exports = { postData }
+async function getData(additionalUrl, token) { //register, login
+    const newUrl = url + additionalUrl;
+
+    console.log('url: ' + newUrl);
+
+    const response = await fetch(newUrl, {
+        method: 'GET',
+        mode: 'cors',
+        cahce: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        redirect: 'follow',
+        referrPolicy: 'no-referrer',
+    });
+    return response.json();
+}
+
+module.exports = { postData, getData }

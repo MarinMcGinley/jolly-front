@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 
+import Friendlist from '../components/Friendlist/Friendlist';
+import Banner from '../components/Banner/Banner';
+
 import './profile.css'
 
 class Profile extends Component {
     render() {
         return (
-            <p>Profile</p>
+            <React.Fragment className="container">
+                <Banner />
+                <Friendlist />
+            </React.Fragment>
         );
     }
 }
