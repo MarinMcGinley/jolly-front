@@ -64,8 +64,10 @@ class LogIn extends Component {
                         <form className="signin-container" onSubmit={this.handleSubmit}>
                             <label className="username-container">Username</label>
                             <input className="input-box" type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+                            
                             <label className="password-container">Password</label>
                             <input className="input-box" type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+                            
                             <input className="button" type="submit" value="Submit" />
                         </form>
                         <p className="register-here">Don't have an account? Register <Link className="a" to="/register">here</Link></p>

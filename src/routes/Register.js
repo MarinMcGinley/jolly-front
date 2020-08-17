@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 import Banner from '../components/Banner/Banner';
+import Error from '../components/Error/Error';
+
+import { postData } from '../API/general';
+
+import './register.css';
 
 
 class Register extends Component {
@@ -11,8 +16,11 @@ class Register extends Component {
             name: '',
             username: '',
             password1: '',
-            password2: ''
-
+            password2: '',
+            isError: false,
+            error: [],
+            withErrorField: false,
+            sussessfullRegister: false
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -39,9 +47,32 @@ class Register extends Component {
         this.setState({password2: event.target.value});
     }
 
-    handleSubmit(event) {
-        console.log(this.state);
+    async handleSubmit(event) {
         event.preventDefault();
+
+        let errorInput = [];
+
+        if (this.state.password1 !== this.state.password2) {
+            errorInput.push({
+                field: "Password",
+                error: "Passwords must be equal"
+            });
+            this.setState({isError: true, error: errorInput, withErrorField: false});
+        } else {
+            const userData = {
+                name: this.state.name,
+                username: this.state.username,
+                password: this.state.password1
+            };
+
+            const result = await postData('/users/register', userData);
+
+            if (result.image) {
+                this.setState({successfullRegister: true, isError: false});
+            } else {
+                this.setState({isError: true, error: result.errors, withErrorField: true});
+            }
+        }
     }
     
     render() {
@@ -51,20 +82,22 @@ class Register extends Component {
                 <section className="container">
                     <form className="register-container" onSubmit={this.handleSubmit}>
                         <label className="name-container">Name</label>
-                        <input className="input-box" type="text" value={this.state.name} onChange={this.handleNameChange} />
+                        <input className="input-box" type="text" value={this.state.name} onChange={this.handleNameChange} disabled={this.state.successfullRegister ? "disabled" : null} />
                         
                         <label className="username-container">Username</label>
-                        <input className="input-box" type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+                        <input className="input-box" type="text" value={this.state.username} onChange={this.handleUsernameChange} disabled={this.state.successfullRegister ? "disabled" : null} />
                         
                         <label className="password-container">Password</label>
-                        <input className="input-box" type="text" value={this.state.password1} onChange={this.handlePassword1Change} />
+                        <input className="input-box" type="password" value={this.state.password1} onChange={this.handlePassword1Change} disabled={this.state.successfullRegister ? "disabled" : null} />
                         
                         <label className="password-container">Please enter password again</label>
-                        <input className="input-box" type="text" value={this.state.password2} onChange={this.handlePassword2Change} />
+                        <input className="input-box" type="password" value={this.state.password2} onChange={this.handlePassword2Change} disabled={this.state.successfullRegister ? "disabled" : null} />
                         
                         <input className="button" type="submit" value="Register" />
                     </form>
+                    {this.state.successfullRegister ? <p className="login-here">You have successfully created an account. Log in <a className="a" href="/">here</a></p> : null}
                 </section>
+                {this.state.isError? <Error errorArray={this.state.error} withField={this.state.withErrorField} /> : null}    
             </React.Fragment>
         ); 
     }

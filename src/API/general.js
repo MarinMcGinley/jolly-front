@@ -15,8 +15,6 @@ function test() {
 async function postData(additionalUrl, data) { //register, login
     const newUrl = url + additionalUrl;
 
-    console.log('url: ' + newUrl);
-
     const response = await fetch(newUrl, {
         method: 'POST',
         mode: 'cors',
@@ -32,10 +30,27 @@ async function postData(additionalUrl, data) { //register, login
     return response.json();
 }
 
-async function getData(additionalUrl, token) { //register, login
+async function postDataWithToken(additionalUrl, data, token) {
     const newUrl = url + additionalUrl;
 
-    console.log('url: ' + newUrl);
+    const response = await fetch(newUrl, {
+        method: 'POST',
+        mode: 'cors',
+        cahce: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        redirect: 'follow',
+        referrPolicy: 'no-referrer',
+        body: JSON.stringify(data)
+    });
+    return response.json();
+}
+
+async function getData(additionalUrl, token) { //register, login
+    const newUrl = url + additionalUrl;
 
     const response = await fetch(newUrl, {
         method: 'GET',
@@ -52,4 +67,4 @@ async function getData(additionalUrl, token) { //register, login
     return response.json();
 }
 
-module.exports = { postData, getData }
+module.exports = { postData, getData, postDataWithToken }
