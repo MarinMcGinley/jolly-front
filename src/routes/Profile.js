@@ -10,7 +10,12 @@ class Profile extends Component {
         return (
             <React.Fragment>
                 <Banner />
-                <Friendlist addFriend={true} />
+                <div className="main-container">
+                    <Friendlist addFriend={true} />
+                    <div className="calendar-container">
+                        <a href='/add-event'>Add event</a>
+                    </div>
+                </div>
             </React.Fragment>
         );
     }

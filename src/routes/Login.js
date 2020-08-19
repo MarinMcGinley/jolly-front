@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import Banner from '../components/Banner/Banner';
 import Error from '../components/Error/Error';
@@ -16,12 +16,20 @@ class LogIn extends Component {
         password: '',
         isError: false,
         error: '',
-        loggedIn: false
+        loggedIn: false,
+        token: ''
     };
 
     handleUsernameChange = this.handleUsernameChange.bind(this);
     handlePasswordChange = this.handlePasswordChange.bind(this);
     handleSubmit = this.handleSubmit.bind(this);
+
+    componentDidMount() {
+        const JWToken = sessionStorage.getItem('jwtToken');
+        if (JWToken) {
+            this.setState({loggedIn: true});
+        }
+    }   
     
 
     handleUsernameChange(event) {
@@ -53,9 +61,7 @@ class LogIn extends Component {
         // meiri lógík til að athuga hvort user er í cookies? eða session?
 
         if (this.state.loggedIn) {
-            return (
-                <Profile />
-            )
+            return <Redirect to='/profile' />
         } else {
             return (
                 <React.Fragment>
