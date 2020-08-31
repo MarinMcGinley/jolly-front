@@ -1,0 +1,40 @@
+
+.calendar-month {
+    width: 90%;
+    margin: auto;
+    padding: auto;
+}
+
+.calendar-weekdays-item {
+    /* display: grid;
+    grid-template-columns: repeat(7, 14.285%);
+    grid-template-rows: 30px repeat(4, 160px); */
+
+    display: flex;
+    margin-bottom: 1rem;
+    /* border: 2px solid rgb(168, 0, 28); */
+}
+
+.calendar-item {
+
+    border-left: 2px solid #FFF;
+    border-right: 2px solid #FFF;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    font-size: 12px;
+    width: 14.285%;
+    height: 30px;
+    /* border: 1px solid pink; */
+    text-align: center;
+    padding-top: 5px;
+}
+
+
+@media(min-width: 610px) {
+    .day {
+        font-size: 1rem;
+    }
+}

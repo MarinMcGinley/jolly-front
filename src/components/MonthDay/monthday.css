@@ -1,0 +1,55 @@
+.month-day-container {
+    width: 14.285%;
+    height: 150px;
+    padding: 0.5rem;
+    border: 1px solid #f0f0f0;
+
+}
+
+.first-day {
+    /* grid-row-start: 2;
+    grid-row-end: 3; */
+    order: -1;
+}
+
+.day-0 {
+    /* grid-column-start: 1;
+    grid-column-end: 2; */
+    margin-left: 0;
+}
+
+.day-1 {
+    /* grid-column-start: 2;
+    grid-column-end: 3; */
+    margin-left: 14.285%;
+}
+
+.day-2 {
+    /* grid-column-start: 3;
+    grid-column-end: 4; */
+    margin-left: 28.57%;;
+}
+
+.day-3 {
+    /* grid-column-start: 4;
+    grid-column-end: 5; */
+    margin-left: 42.855%;
+}
+
+.day-4 {
+    /* grid-column-start: 5;
+    grid-column-end: 6; */
+    margin-left: 57.14%;
+}
+
+.day-5 {
+    /* grid-column-start: 6;
+    grid-column-end: 7; */
+    margin-left: 71.425%;
+}
+
+.day-6 {
+    /* grid-column-start: 7;
+    grid-column-end: 8; */
+    margin-left: 85.71%;
+}

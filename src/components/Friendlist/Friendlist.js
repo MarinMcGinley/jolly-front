@@ -27,9 +27,9 @@ class Friendlist extends Component {
 
     async componentDidMount() {
         const JWToken = sessionStorage.getItem('jwtToken');
-        if (!JWToken) {
-            Router.push('/');
-        }
+        // if (!JWToken) {
+        //     Router.push('/');
+        // }
 
         this.setState({ token: JWToken }, async () => {
             const allFriends = await getData('/users/me/friends', JWToken);

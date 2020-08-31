@@ -6,6 +6,11 @@ html, body, #root {
 
 .main-container {
     display: flex;
-    flex-direction: row;
-    height: 100%;
+    flex-direction: column;
+}
+
+@media(min-width: 820px) {
+    .main-container {
+        flex-direction: row;
+    }
 }

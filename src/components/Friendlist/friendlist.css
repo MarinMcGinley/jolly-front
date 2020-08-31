@@ -1,19 +1,10 @@
-* {
-    /* border: 2px solid pink; */
-}
 
-/* #root {
-    min-height: 100%;
-} */
 
 .friendlist {
-    /* border: 2px solid green; */
-    max-width: 300px;
-    min-height: 100%;
-    padding: 1em;
-    padding-top: 3em;
-    border-right: 2px solid #f0f0f0;
 
+    min-width: 100%;
+    padding: 3em;
+    padding-top: 3em;
     font-size: 12px;
     color: rgb(0, 0, 0);
     font-family: 'Roboto', sans-serif;
@@ -35,8 +26,15 @@
     font-size: 1.2em;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 820px) {
     .friendlist {
+        /* width: 300px; */
+        width: 100%;
+        max-width: 300px;
+        min-width: 300px;
+        min-height: 100%;
+        padding: 1em;
+        border-right: 2px solid #f0f0f0;
 
     }
 }
