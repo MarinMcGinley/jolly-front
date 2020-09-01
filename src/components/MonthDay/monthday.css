@@ -12,6 +12,20 @@
     order: -1;
 }
 
+.today {
+    border: 1px solid red;
+    border-radius: 50%;
+}
+
+.day-number-text {
+    width: 20px;
+    text-align: center;
+    display: inline-block;
+    margin: 0;
+    
+    padding: 2px;
+}
+
 .day-0 {
     /* grid-column-start: 1;
     grid-column-end: 2; */

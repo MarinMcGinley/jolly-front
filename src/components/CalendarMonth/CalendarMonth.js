@@ -9,16 +9,20 @@ class CalendarMonth extends Component {
 
     state = {
         firstDay: '',
-        daysInMonth: ''
+        daysInMonth: '',
+        todayInMonth: 'false',
+        today: ''
     }
 
     componentDidMount() {
         this.calculateMonth();
+        this.isTodayInMonth();
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.date !== this.props.date) {
             this.calculateMonth();
+            this.isTodayInMonth();
         }
     }
 
@@ -27,16 +31,36 @@ class CalendarMonth extends Component {
         const month = this.props.date.getMonth();
         const weekDayOfFirstDayOfMonth = new Date(year + "-" + (month+1) + "-01").getDay();
         const daysInMonthCalc = new Date(year, month+1, 0).getDate();
-        console.log("year: " + year + " month: " + month);
         this.setState({firstDay: weekDayOfFirstDayOfMonth, daysInMonth: daysInMonthCalc});
+    }
+
+    isTodayInMonth() {
+        const year = this.props.date.getFullYear();
+        const month = this.props.date.getMonth();
+
+        const today = new Date();
+        const thisYear = today.getFullYear();
+        const thisMonth = today.getMonth();
+        if (year === thisYear && month === thisMonth) {
+            this.setState({todayInMonth: true, today: today.getDate()});
+        } else {
+            this.setState({todayInMonth: false})
+        }
     }
 
     render() {
 
         const days = [];
 
+
+        days.push(<MonthDay key={1} firstDay={true} day={this.state.firstDay} keyDay={1} today={this.state.todayInMonth & this.state.today === 1? true : false}/>)
         for (let i = 2; i<=this.state.daysInMonth; i++) {
-            days.push(<MonthDay firstDay={false} keyDay={i} />)
+            if (this.state.todayInMonth && this.state.today === i) {
+                days.push(<MonthDay key={i} firstDay={false} keyDay={i} today={true}/>)
+            } else {
+                days.push(<MonthDay key={i} firstDay={false} keyDay={i} today={false}/>)
+            }
+            
         }
         
         return (
@@ -67,7 +91,6 @@ class CalendarMonth extends Component {
                         
                     </div>
                     <div className="calendar-item">
-                        <MonthDay firstDay={true} day={this.state.firstDay} keyDay={1} />
                         {days}
                     </div>
                 </div>

@@ -8,13 +8,13 @@ class Monthday extends React.Component {
         if (this.props.firstDay) {
             return (
                 <div className={`month-day-container first-day day-${this.props.day}`}>
-                    {this.props.keyDay}
+                    <p className={`day-number-text ${this.props.today ? 'today' : null}`}>{this.props.keyDay}</p>
                 </div>
             );
         } else {
             return (
                 <div className="month-day-container">
-                    {this.props.keyDay}
+                    <p className={`day-number-text ${this.props.today ? 'today' : null}`}>{this.props.keyDay}</p>
                 </div>
             );
         }
